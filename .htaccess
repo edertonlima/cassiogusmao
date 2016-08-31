@@ -1,14 +1,12 @@
-Options +FollowSymLinks
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteBase /cassiogusmao/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /cassiogusmao/index.php [L]
+</IfModule>
 
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
-
-RewriteRule ^em-carreata-iris-percorre-18-bairros-da-regiao-leste$ detalhe-noticias.php
-RewriteRule ^em-carreata-iris-percorre-18-bairros-da-regiao-leste-video$ detalhe-noticias-video.php
-RewriteRule ^agenda$ agenda.php
-RewriteRule ^noticias$ noticias.php
-RewriteRule ^plano-governo$ plano-governo.php
-
-ErrorDocument 404 /404.php
-Options All -Indexes
+# END WordPress
