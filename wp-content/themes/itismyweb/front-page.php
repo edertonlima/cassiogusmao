@@ -1,193 +1,208 @@
 <?php get_header(); ?>
 
-<session class="slide-page">
-    <?php
-        $getSlide = array(
-            'post_type' => 'post',
-            'post_status' => 'any',
-            'category_name' => 'home',
-            'orderby'           => date,
-            'order'             => 'ASC'
-        );
-        $slide = new WP_Query( $getSlide );
-        if(count($slide) > 0){ 
-        	$i = 0; ?>
-
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-					<?php while($slide->have_posts()) : $slide->the_post(); 
-						$imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' ); ?>
-						<div class="item <?php if($i == 0){ echo 'active'; } ?>" style="background-image: url('<?php if($imagem[0]){ echo $imagem[0]; } ?>');">
-							<?php the_field('texto_slide') ?>
-						</div>
-						<?php $i = $i+1; 
-					endwhile; ?>
-				</div>
-				<?php if($i > 0){ ?>
-					<ol class="carousel-indicators">
-						<?php for($indicator=0; $indicator<$i; $indicator++){ ?>
-							<li data-target="#myCarousel" data-slide-to="<?php echo $indicator; ?>" class="<?php if($indicator == 0){ echo "active"; } ?>"></li>
-						<?php } ?>
-					</ol>
-				<?php } ?>
-			</div>
-            
-        <?php }
-    ?>
-</session>
-
-<session class="box-conteudo beneficios-servicos">
+<header class="header box-content" style="background-image: url('<?php the_field('banner_de_fundo', 'option'); ?>');">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-5 justify-center">
-				<img src="<?php the_field('imagem_beneficio', 12) ?>" alt="Benefícios">
-				<h2 class="destaque"><?php the_field('titulo_beneficio', 12) ?></h2>
-				<p><?php the_field('texto_beneficio', 12) ?></p>
-			</div>
-			<div class="col-md-5 col-md-offset-2 justify-center ">
-				<img src="<?php the_field('imagem_servicos', 12) ?>" alt="Serviços">
-				<h2 class="destaque"><?php the_field('titulo_servicos', 12) ?></h2>
-				<p><?php the_field('texto_servicos', 12) ?></p>
-			</div>
+		<div class="img-header">
+			<img src="<?php the_field('imagem_candidato', 'option'); ?>" alt="">
 		</div>
 	</div>
-</session>
+</header>
 
-<session class="box-conteudo imagem full-height" style="background-image: url('<?php the_field('imagem_destaque', 12) ?>');">
-	<h2 class=""><span><?php the_field('texto_destaque', 12) ?></span></h2>
-</session>
-
-<?php switch (qtrans_getLanguage()) {
-	case "pt":
-		$localizacao = 'Localização';
-		$brasil = 'Brasil';
-		$china = 'China';
-		$fale_conosco = 'Fale Conosco';
-		$enviar = 'ENVIAR';
-	break;
-
-	case "en":
-		$localizacao = 'Location';
-		$brasil = 'Brasil';
-		$china = 'China';
-		$fale_conosco = 'Contact Us';
-		$enviar = 'SEND';
-	break;
-
-	case "es":
-		$localizacao = 'Localização';
-		$brasil = 'Brasil';
-		$china = 'China';
-		$fale_conosco = 'Hable con nosotros';
-		$enviar = 'ENVIAR';
-	break;
-} ?>
-
-<session class="box-conteudo" id="contato">
+<section class="box-content bg-default noticias destaque">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 box-contato">
-				<h2 class="destaque center"><?php echo $localizacao; ?></h2>
-				<div class="col-md-6 localizacao">
-					<h3><img src="<?php echo get_template_directory_uri(); ?>/assets/images/ico-mapa-verde.png"><?php echo $brasil; ?></h3>
-					<p><?php the_field('brasil', 12) ?></p>
-				</div>
-				<div class="col-md-6 localizacao">
-					<h3><img src="<?php echo get_template_directory_uri(); ?>/assets/images/ico-mapa-vermelho.png"><?php echo $china; ?></h3>
-					<p><?php the_field('china', 12) ?></p>
-				</div>
-			</div>
-			<div class="col-md-5 col-md-offset-1 box-contato">
-				<h2 class="destaque center"><?php echo $fale_conosco; ?></h2>
-				<p class="msg-form"></p>
-				<form action="javascript:" class="contato">
-					<fieldset>
-						<input type="text" name="nome" id="nome" placeholder="NOME">
-						<input type="text" name="email" id="email" placeholder="E-MAIL">
-						<input type="text" name="telefone" id="telefone" placeholder="TELEFONE">
-						<textarea name="mensagem" id="mensagem" placeholder="ESCREVA AQUI SUA MENSAGEM"></textarea>
-						<button type="submit" class="enviar"><?php echo $enviar; ?></button>
-					</fieldset>
-				</form>
-			</div>
-		</div>
-	</div>
-</session>
+			<div class="col col-9">
+				<h2>Destaque <a href="<?php echo get_home_url(); ?>/noticias/"><i class="fa fa-plus" aria-hidden="true"></i> Ver mais notícias</a></h2>
 
-<session class="box-conteudo" style="padding-top: 0;">
-	<div class="container">
+			    <?php
+			        $getNoticia = array(
+			            'post_type' => 'post',
+			            'post_status' => 'any',
+			            'orderby'           => date,
+			            'order'             => 'DESC',
+			            'posts_per_page' => 1
+			        );
 
-		<?php
-	    $getClientes = array(
-	        'post_type' => 'clientes',
-	        'post_status' => 'any',
-	        'orderby'           => date,
-	        'order'             => 'ASC'
-	    );
-	    $clientes = new WP_Query( $getClientes ); ?>
+			        $noticia = new WP_Query( $getNoticia );
 
-		<div class="row">
-			<div class="col-md-12">
-				<div class="carousel" id="clientes">
-					<?php while($clientes->have_posts()) : $clientes->the_post(); 
-						$i = $i+1; 
+					while($noticia->have_posts()) : $noticia->the_post(); 
 						$imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' ); ?>
-						<div class="item">
-							<?php if(get_field('url_cliente')){ ?>
-								<a href="<?php the_field('url_cliente'); ?>" target="_blank" title="<?php echo get_the_title(); ?>"><img src="<?php echo $imagem[0]; ?>" alt="<?php echo get_the_title(); ?>"></a>
-							<?php }else{ ?>
-								<img src="<?php echo $imagem[0]; ?>" alt="<?php echo get_the_title(); ?>">
+
+						<a href="<?php the_permalink(); ?>">
+							<?php if($imagem[0]){ ?>
+								<div class="col col-5">
+									<span>
+										<img src="<?php if($imagem[0]){ echo $imagem[0]; } ?>" alt="<?php the_title(); ?>">
+										<div class="saiba-mais">
+											<i class="fa <?php if(get_field('video') == ''){ echo 'fa-search'; }else{ echo 'fa-youtube-play'; } ?>" aria-hidden="true"></i>
+										</div>
+									</span>
+								</div>
 							<?php } ?>
-						</div>
+							<div class="col col-7">
+								<h5><?php the_title(); ?></h5>
+								<span class="data list">
+									<i class="fa fa-calendar-check-o" aria-hidden="true"></i> <?php echo get_the_date(); ?>
+								</span>
+								<p><?php the_field('resumo'); ?></p>
+							</div>
+						</a>
+
 					<?php endwhile; ?>
+
+			</div>
+			<div class="col col-3">
+				<div class="facebook-widget">
+					<?php if(get_field('facebook', 'option') != ''){ ?>
+						<div class="fb-page" data-href="<?php the_field('facebook', 'option'); ?>" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
-
 	</div>
-</session>
+</section>
+
+<section class="box-content noticias">
+	<div class="container">
+		<h2>Notícias <a href="<?php echo get_home_url(); ?>/noticias/"><i class="fa fa-plus" aria-hidden="true"></i> Ver mais notícias</a></h2>
+		
+		<div class="row">
+
+	    <?php
+	        $getNoticia = array(
+	            'post_type' => 'post',
+	            'post_status' => 'any',
+	            'orderby'           => date,
+	            'order'             => 'DESC',
+	            'posts_per_page' => 3,
+	            'offset' => 1
+	        );
+
+	        $noticia = new WP_Query( $getNoticia );
+
+			while($noticia->have_posts()) : $noticia->the_post(); 
+				$imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' ); ?>
+				<div class="col col-4">
+					<a href="<?php the_permalink(); ?>">
+						<?php if($imagem[0]){ ?>
+							<span>
+								<img src="<?php if($imagem[0]){ echo $imagem[0]; } ?>" alt="<?php the_title(); ?>">
+								<div class="saiba-mais">
+									<i class="fa <?php if(get_field('video') == ''){ echo 'fa-search'; }else{ echo 'fa-youtube-play'; } ?>" aria-hidden="true"></i>
+								</div>
+							</span>
+						<?php } ?>
+						<h5><?php the_title(); ?></h5>
+						<span class="data list">
+							<i class="fa fa-calendar-check-o" aria-hidden="true"></i> <?php echo get_the_date(); ?>
+						</span>
+						<p><?php the_field('resumo'); ?></p>
+					</a>
+				</div>
+
+			<?php endwhile; ?>
+
+		</div>
+	</div>
+</section>
+
+<section class="box-content agenda bg-default">
+	<div class="container">
+		<h2>Agenda <a href="<?php echo get_home_url(); ?>/agendas/"><i class="fa fa-plus" aria-hidden="true"></i> Ver toda a agenda</a></h2>
+		
+		<div class="row">
+		    <?php
+		        $getNoticia = array(
+		            'post_type' => 'agendas',
+		            'post_status' => 'any',
+		            'orderby'           => date,
+		            'order'             => 'DESC',
+		            'posts_per_page' => 3
+		        );
+
+		        $noticia = new WP_Query( $getNoticia );
+
+				while($noticia->have_posts()) : $noticia->the_post(); ?>
+
+					<div class="col col-4">
+						<a>
+							<span>
+								<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+								<?php the_date(); ?>
+							</span>
+							<h5><?php the_title(); ?></h5>
+							<p><?php the_excerpt(); ?></p>
+						</a>
+					</div>
+				
+				<?php endwhile; 
+			?>
+		</div>
+	</div>
+</section>
 
 <?php get_footer(); ?>
- 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".enviar").click(function(){
-			$('.enviar').html('ENVIANDO').prop( "disabled", true );
-			$('.msg-form').html('').hide();
-			var nome = $('#nome').val();
-			var email = $('#email').val();
-			var telefone = $('#telefone').val();
-			var mensagem = $('#mensagem').val();
 
-			if(email!=''){
-				$.getJSON("<?php echo get_template_directory_uri(); ?>/mail.php", { nome: nome, email: email, telefone: telefone, mensagem: mensagem }, function(result){		
-					$('.msg-form').html(result).show();
-					$('.contato').trigger("reset");
-					$('.enviar').html('ENVIAR').prop( "disabled", false );
-				});
-			}else{
-				$('.msg-form').html('Por favor, digite um e-mail válido.').show();
-				$('.enviar').html('Enviar').prop( "disabled", false );
-			}
-		});
-	});
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=677209209084153";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+
+	/* MENU FIXED */
+	var position = '';
+	function menuFixed(position){		
+		if(position > 1){
+			jQuery('.nav').addClass('menu-fixed');
+		}else{
+			jQuery('.nav').removeClass('menu-fixed');
+		}
+	}
+
+	$(document).ready(function(){
+
+		/* MENU FIXED */
+		position = jQuery(window).scrollTop();
+    	menuFixed(position);
+	    jQuery(window).scroll(function(){
+	    	position = jQuery(window).scrollTop();
+	    	menuFixed(position);
+	    });
+
+	    /* TABS HOME */	    
+	    var height_tabs = ($('.plano-governo').height()) + 20;
+	    $('.tabs-item').css('min-height',(height_tabs+'px'));
+
+	    $('.plano-governo li').click(function(){
+	    	var tabs_item = $(this).attr('rel');
+	    	$('.tabs-item').removeClass('active');
+	    	$('.plano-governo li').removeClass('active');
+
+	    	$(this).addClass('active');
+	    	$(tabs_item).addClass('active');
+	    });
+
+	});	
+
 </script>
 
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.bxslider.js"></script>
+<!-- Scrolling Nav JavaScript -->
+<script src="assets/js/jquery.easing.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$('#clientes').bxSlider({
-			minSlides: 2,
-			maxSlides: 4,
-			slideWidth: 150,
-			slideMargin: 50,
-			pager: false,
-			auto: true,
-			pause: 6000,
-			controls: false,
-			autoStart: true,
-			responsive: true
-		});
+	//jQuery for page scrolling feature - requires jQuery Easing plugin
+	jQuery(function() {
+	    jQuery('.scroll').bind('click', function(event) {
+	        var anchor = jQuery(this);
+	        var position = (jQuery(anchor.attr('href')).offset().top)-110;
+	        jQuery('html, body').stop().animate({
+	            scrollTop: position
+	        }, 1500, 'easeInOutExpo');
+	        event.preventDefault();
+	    });
 	});
 </script>

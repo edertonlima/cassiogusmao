@@ -359,9 +359,17 @@ p {
 				padding: 0 20px;
 				font-size: 1rem;
 				font-weight: 600;
+				text-transform: uppercase;
 				@include animacao('','');
 
 				&:hover {
+					background-color: $cor-1;
+					color: #ffffff;
+				}
+			}
+
+			&.current-menu-item, &.current-menu-parent {
+				a {
 					background-color: $cor-1;
 					color: #ffffff;
 				}
@@ -558,6 +566,7 @@ p {
 			margin: 26px 0px;
 			top: 0;
 			right: 0;
+			cursor: pointer;
 			background-color: transparent;
 
 			i {
@@ -616,6 +625,10 @@ p {
 			margin-top: 75px;
 		}
 	}
+
+	.col:nth-child(4) {
+		clear: both;
+	}
 }
 
 /* AGENDA */
@@ -635,7 +648,7 @@ p {
 			padding: 0px 10px;
 			color: $cor-1;
 			font-weight: 600;
-			font-size: 2rem;
+			font-size: 1.5rem;
 
 			i {
 				color: $cor-1;
@@ -735,13 +748,13 @@ p {
 		max-width: 100%;
 	}
 
-	.img-noticia, iframe.video-noticia {
+	.img-noticia, .video-noticia iframe {
 		width: 100%;
 		display: block;
 		margin-bottom: 40px;
 	}
 
-	iframe.video-noticia {
+	.video-noticia iframe {
 		height: 400px;
 	}
 }
