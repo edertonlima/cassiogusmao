@@ -1,11 +1,8 @@
-	<section class="box-content new">
-		<form action="#">
-			<fieldset>
-				<h4>RECEBA AS ÚLTIMAS NOTÍCIAS NO SEU E-MAIL</h4>
-				<input type="text" name="" placeholder="Digite seu melhor e-mail">
-				<button type="submit">ENVIAR</button>
-			</fieldset>
-		</form>
+	<section class="box-content jingle">
+		<div class="container">
+			<h4>CONHEÇA NOSSO JINGLE</h4>
+			<?php the_field('jingle', 'option'); ?>
+		</div>
 	</section>
 
 	<footer class="box-content footer">

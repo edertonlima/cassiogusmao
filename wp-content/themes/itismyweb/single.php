@@ -6,7 +6,7 @@
 	</div>
 </section>
 
-<section class="box-content noticias">
+<section class="box-content noticias detalhe">
 	<div class="container">
 		<article class="noticia">
 			<header class="header-noticia">
@@ -49,7 +49,7 @@
 						<span class='st_email_large' displayText='Email'></span>
 					</div>
 				</div>
-				<div class="col col-4">
+				<div class="col col-4 detalhe-facebook">
 					<div class="facebook-widget">
 						<?php if(get_field('facebook', 'option') != ''){ ?>
 							<div class="fb-page" data-href="<?php the_field('facebook', 'option'); ?>" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>

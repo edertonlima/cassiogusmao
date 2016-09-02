@@ -125,6 +125,10 @@ h2 {
 		margin-bottom: 0;
 		text-align: left;
 	}
+
+	@media all and (max-width: 900px){
+		font-size: 2rem;
+	}
 }
 
 h3 {
@@ -210,6 +214,12 @@ p {
     &.destaque {
     	h2 {
     		text-align: left;
+    	}
+    }
+
+    @media all and (max-width: 600px) {
+    	.container {
+    		padding: 0 20px;
     	}
     }
 }
@@ -348,6 +358,35 @@ p {
 			margin: 15px 0;
 		}
 
+		@media all and (max-width: 900px) {
+			#menu-principal {
+				&.active {
+					display: block;
+					position: absolute;
+					top: 80px;
+					background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+					width: 100%;
+					right: 0px;
+					margin: 0px;
+					height: auto;
+					padding: 20px 0px 0px;
+					text-align: center;
+					min-height: 50px;
+
+					@media all and (max-width: 500px) {
+						text-align: right;
+						padding: 80px 0 20px;
+
+						li {
+							float: right;
+							clear: both;
+							margin-right: 20px;
+						}
+					}
+				}
+			}
+		}
+
 		li {
 			display: inline-block;
 			overflow: hidden;
@@ -381,6 +420,21 @@ p {
 			height: 80px;
 			line-height: 80px;
 
+			@media all and (max-width: 992px) {
+				margin-left: 40px;
+			}
+
+			@media all and (max-width: 500px) {
+				display: none;
+				position: absolute;
+				right: 40px;
+				top: 80px;
+
+				&.active {
+					display: block;
+				}
+			}
+
 			a {
 				font-size: 3rem;
 				display: inline-block;
@@ -408,6 +462,59 @@ p {
 		display: none;
 	}
 
+	#menuCompacto {
+	    float: left;
+	    width: 40px;
+	    height: 30px;
+	    margin-top: 28px;
+	    text-decoration: none;
+	    cursor: pointer;
+
+	    span {
+			background-color: $cor-2;
+			height: 4px;
+			width: 40px;
+			position: relative;
+			display: block;
+
+			&:after, &:before {
+			    content: '';
+			    position: absolute;
+			    background-color: $cor-2;
+			    height: 4px;
+			    width: 40px;
+			}
+
+			&:before {
+			    top: 10px;
+			}
+
+			&:after {
+				top: 20px;
+			}
+	    }
+
+	    &:hover, &.active {
+			span {
+				background-color: $cor-1;
+
+				&:after, &:before { 
+					background-color: $cor-1;
+				}
+			}
+	    }
+
+		@media all and (max-width: 900px) {
+			display: inline-block;
+		}
+	}
+
+	@media all and (max-width: 900px) {
+		#menu-principal {
+			display: none;
+		}
+	}
+
 	&.menu-fixed {
 		background-color: #fff;
 		box-shadow: 0 2px #f6f6f6;
@@ -416,9 +523,22 @@ p {
 			display: block;
 		}
 	}
+
+	.container {
+		@media all and (max-width: 500px) {
+			padding: 0 20px;
+		}
+	}
 }
 
 /* PLANO DE GOVERNO */
+.plano-governo {
+	@media all and (max-width: 900px) {
+		.sub-titulo {
+			text-align: center;
+		}
+	}
+}
 .menu-plano-governo, .tabs {
 	float: left;
 }
@@ -427,6 +547,8 @@ p {
 	width: 25%;
 	overflow: hidden;
 	border-radius: 4px 0 0 4px;
+	border-right: 3px solid $cor-1;
+	@include box-sizing();
 
 	li {
 		display: block;
@@ -445,6 +567,18 @@ p {
 		&.active {
 			background-color: $cor-1;
 			color: #ffffff;
+		}
+	}
+
+	@media all and (max-width: 900px) {
+		width: 100%;
+		text-align: center;
+		margin: 20px 0px 40px;
+		border: none;
+
+		li {
+			display: inline-block;
+			padding: 10px;
 		}
 	}
 }
@@ -467,10 +601,12 @@ p {
 
 		&.active {
 			display: block;
-			border-left: 3px solid $cor-1;
 		}
 	}
 
+	@media all and (max-width: 900px) {
+		width: 100%;
+	}
 }
 
 
@@ -582,6 +718,12 @@ p {
 					color: $cor-1;
 				}
 			}
+
+			@media all and (max-width: 500px) {
+				display: block;
+				position: relative;
+				margin: 0px;
+			}
 		}
 	}
 
@@ -606,6 +748,12 @@ p {
 			&.title {
 				line-height: 30px;
 				width: 90px;
+
+				@media all and (max-width: 400px) {
+					width: 100%;
+					line-height: 20px;
+					height: 20px;
+				}
 			}
 		}
 	}
@@ -613,6 +761,28 @@ p {
 	&.list {
 		.col {
 			margin-bottom: 80px;
+		}
+	}
+
+	&.detalhe {
+		@media all and (max-width: 1050px) {
+			&:not(.list){
+
+				.content {
+					width: 100%;
+				}
+
+				.col.col-4 {
+					&.detalhe-facebook {
+						width: 100%;
+						margin-top: 30px;
+
+						.facebook-widget {
+							text-align: center;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -624,10 +794,57 @@ p {
 		.facebook-widget {
 			margin-top: 75px;
 		}
-	}
+
+		@media all and (max-width: 900px) {
+			.col.col-9 {
+				width: 100%;
+			}
+
+			.col.col-3 {
+				display: none;
+			}
+		}
+
+		@media all and (max-width: 750px) {
+			.col.col-9 {
+				.col {
+					width: 100%;
+				}
+
+				h5 {
+					margin-top: 20px;
+				}
+			}
+		}
+	} 
 
 	.col:nth-child(4) {
 		clear: both;
+	}
+
+	@media all and (max-width: 1050px){
+		:not(.list){
+			.col.col-4 {
+				width: 50%;
+
+				&:nth-child(3){
+					display: none;
+				}
+			}
+		}
+	}
+
+	@media all and (max-width: 750px){
+		:not(.list), &.list {
+			.col.col-4 {
+				width: 100%;
+				margin-bottom: 60px;
+
+				&:last-child {
+					margin-bottom: 0px;
+				}
+			}
+		}
 	}
 }
 
@@ -684,6 +901,7 @@ p {
 	}
 }
 
+
 /* NEWS */
 .new {
 	background-color: $cor-1;
@@ -716,7 +934,42 @@ p {
 					border-color: darken($cor-2, 15%);
 				}
 			}
+
+			@media all and (max-width: 1420px){
+				width: 80%;
+			}
+
+			@media all and (max-width: 900px){
+				input {
+					width: 70%;
+				}
+			}
+
+			@media all and (max-width: 500px){
+				input {
+					width: 100%;
+					margin-bottom: 10px;
+				}
+			}
 		}
+	}
+}
+
+/* NEWS */
+.jingle {
+	background-color: $cor-1;
+
+	h4 {
+		text-align: center;
+		color: #ffffff;
+		margin-bottom: 20px;
+	}
+
+	iframe {
+		width: 70%;
+		height: 150px;
+		margin: 0 auto;
+		display: block;
 	}
 }
 
@@ -735,6 +988,26 @@ p {
 
 		&.info {
 			float: right;
+		}
+	}
+
+	@media all and (max-width: 1000px){
+		span {
+			width: 50%;
+
+			&.info {
+				text-align: right;
+			}
+		}
+	}
+
+	@media all and (max-width: 750px){
+		span {
+			width: 100%;
+
+			&.info, &.copy {
+				text-align: center;
+			}
 		}
 	}
 }

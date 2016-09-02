@@ -29,20 +29,16 @@
 	$(document).ready(function(){
 
 		/* OPEN/CLOSE MENU */
-		$('.menu-mobile').click(function(){
+		$('#menuCompacto').click(function(){
 			if($(this).hasClass('active')){
 				$(this).removeClass('active');
-				$('.nav').css('top','-100vh');
-				$('.submenu').hide();
+				$('#menu-principal').removeClass('active');
+				$('.redes-sociais').removeClass('active');
 			}else{
 				$(this).addClass('active');
-				$('.nav').css('top','0');
+				$('#menu-principal').addClass('active');
+				$('.redes-sociais').addClass('active');
 			}
-		});
-
-		/* SUB MENU */
-		$('.menu-item-has-children a').click(function(){
-			$('.sub-menu').toggle();
 		});
 
 	});	
@@ -58,22 +54,20 @@
 				<img src="<?php the_field('logo', 'option'); ?>" alt="<?php echo get_bloginfo('name') ?>">
 			</a></h1>
 
-			<div class="menu">
-				<button id="menuCompacto"><span>MENU</span></button>
-				
+			<div class="menu">				
 				<?php 
 					$redes_sociais = '<div class="redes-sociais">';
 					if(get_field('facebook', 'option') != ''){
 						$redes_sociais.='<a href="'.get_field('facebook', 'option').'" title="Facebook" class="facebook" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>';
 					}
 					if(get_field('instagran', 'option') != ''){
-						$redes_sociais.='<a href="'.get_field('instagran', 'option').'" title="Instagran" class="instagran" target="_blank"><i class="fa fa-instagran" aria-hidden="true"></i></a>';
+						$redes_sociais.='<a href="'.get_field('instagran', 'option').'" title="Instagran" class="instagran" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>';
 					}
 					$redes_sociais.= '</div>';
 					wp_nav_menu(array(
 						'menu'           => 'Menu',
 					    'theme_location' => 'primary',
-					    'items_wrap'     => '<ul class="menu" id="menu-principal">%3$s</ul>'.$redes_sociais
+					    'items_wrap'     => '<a id="menuCompacto"><span></span></a><ul class="menu" id="menu-principal">%3$s</ul>'.$redes_sociais
 					)); 
 				?>
 			</div>

@@ -46,10 +46,7 @@
 
 	$(document).ready(function(){
 
-	    /* TABS HOME */	    
-	    var height_tabs = ($('.plano-governo').height()) + 20;
-	    $('.tabs-item').css('min-height',(height_tabs+'px'));
-
+	    /* TABS HOME */	
 	    $('.plano-governo li').click(function(){
 	    	var tabs_item = $(this).attr('rel');
 	    	$('.tabs-item').removeClass('active');
